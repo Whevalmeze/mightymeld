@@ -18,10 +18,19 @@ export const possibleTileContents = [
 
 export function StartScreen({ start }) {
   return (
-    <div>
-      <button onClick={start} className="bg-gray-400 text-white p-3">
-        Play
-      </button>
+    <div className="flex items-center justify-center w-screen h-screen">
+      <div className="w-[300px] h-[300px] flex flex-col bg-pink-50 rounded-lg text-center items-center justify-center text-pink-500 gap-6">
+        <h1 className="text-pink-500 font-bold text-2xl">Memory</h1>
+        <p className="text-sm font-semibold">
+          Flip over tiles looking for pairs
+        </p>
+        <button
+          onClick={start}
+          className="bg-pink-500 text-white px-7 py-0.5 rounded-full "
+        >
+          Play
+        </button>
+      </div>
     </div>
   );
 }
@@ -109,12 +118,20 @@ export function PlayScreen({ end }) {
 
   return (
     <>
-      <div>
-        {getTiles(6).map((tile, i) => (
-          <Tile key={i} flip={() => flip(i)} {...tile} />
-        ))}
+      <div className="text-center flex flex-col w-screen h-screen items-center justify-center gap-5 text-indigo-500">
+        <span className="gap-2 items-center flex">
+          Tries
+          <span className="bg-indigo-200 rounded-md max-h-[20px] px-2 flex items-center justify-center">
+            {tryCount}
+          </span>
+        </span>
+
+        <div className="grid grid-cols-4 grid-rows-4 bg-indigo-50 rounded-lg p-4 gap-4 items-center justify-items-center w-[300px] h-[300px]">
+          {getTiles(16).map((tile, i) => (
+            <Tile key={i} flip={() => flip(i)} {...tile} />
+          ))}
+        </div>
       </div>
-      {tryCount}
     </>
   );
 }
